@@ -15,7 +15,7 @@ namespace ConstructionAPIs.Controllers
         }
 
         [HttpGet("GetAll")]
-        public async Task<IActionResult> GetAll(string Lang="EN")
+        public async Task<IActionResult> GetAll(string Lang="en")
          {
             var result = await _contentPageRepository.GetAll(Lang);
             return Ok(result);

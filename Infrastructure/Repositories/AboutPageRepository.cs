@@ -22,7 +22,7 @@ namespace Infrastructure.Repositories
 
         public async Task<dynamic> GetAll(string Lang)
         {
-            if (Lang == "AR")
+            if (Lang == "ar")
             {
                 var aboutPage =
                     await construction_Context.AboutPage

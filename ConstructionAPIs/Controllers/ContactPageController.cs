@@ -17,7 +17,7 @@ namespace ConstructionAPIs.Controllers
         }
 
         [HttpGet("GetAll")]
-        public async Task<IActionResult> Get(string Lang = "EN")
+        public async Task<IActionResult> Get(string Lang = "en")
         {
             var res = await contactPageRepository.GetAll(Lang);
             return Ok(res);

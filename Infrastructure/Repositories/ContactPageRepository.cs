@@ -23,7 +23,7 @@ namespace Infrastructure.Repositories
         }
         public async Task<dynamic> GetAll(string Lang)
         {
-            if (Lang == "EN")
+            if (Lang == "en")
             {
                 var result = await constructionContext.Contact
                     //.OrderByDescending(i => i.Id)    Null Value Exception because This line  so Include of object was after orderint and this object null .

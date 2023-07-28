@@ -16,11 +16,11 @@ namespace ConstructionAPIs.Controllers
             this.aboutPageRepository = aboutPageRepository;
         }
 
-        [HttpPost("GetAll")]
-        public async Task<IActionResult> Details([FromBody] string lang = "en")
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> Details(string Lang = "en")
         {
             
-            var result = await aboutPageRepository.GetAll(lang);
+            var result = await aboutPageRepository.GetAll(Lang);
             return Ok(result);
 
         }
@@ -28,8 +28,8 @@ namespace ConstructionAPIs.Controllers
 
         public async Task<IActionResult> AddAbout( [FromForm] AboutDto dto)
         {
-            //if (dto.bg == null)
-            //    return BadRequest("Poster is required!");
+            if (dto.bg == null)
+                return BadRequest("Poster is required!");
 
             //if (!_allowedExtenstions.Contains(Path.GetExtension(dto.bg.FileName).ToLower()))
             //    return BadRequest("Only .png and .jpg images are allowed!");

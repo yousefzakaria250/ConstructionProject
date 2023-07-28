@@ -24,7 +24,7 @@ namespace Infrastructure.Repositories
 
         public async Task<dynamic> GetAll(string Lang)
         {
-            if (Lang == "AR")
+            if (Lang == "ar")
             {
                 var result = await constructionContext.ContentPage
                     .Include(i => i.Content)
