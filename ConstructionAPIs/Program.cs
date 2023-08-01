@@ -53,21 +53,31 @@ builder.Services.AddScoped<IContactPageRepository, ContactPageRepository>();
 //builder.Services.AddCors();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+//if (app.Environment.IsDevelopment())
+//{
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+//}
 
-//app.UseStaticFiles();
+app.UseStaticFiles();
 
 app.UseStaticFiles(new StaticFileOptions()
 {
     RequestPath = "/Content",
     FileProvider = new PhysicalFileProvider
             (Path.Combine(Directory.GetCurrentDirectory(),
-            "Content" ))
+            "Content"))
 });
+
+//app.UseStaticFiles(new StaticFileOptions()
+//{
+//    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Content")),
+//    RequestPath = new PathString("/Content")
+//});
+
+
+
+
 app.UseHttpsRedirection();
 app.UseCors("Cors");
 app.UseRouting();

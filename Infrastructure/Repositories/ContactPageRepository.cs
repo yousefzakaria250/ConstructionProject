@@ -106,7 +106,7 @@ namespace Infrastructure.Repositories
             string NewName = Guid.NewGuid().ToString() + file.FileName;
             FileStream fs = new FileStream(
                  Path.Combine(Directory.GetCurrentDirectory(),
-                  "Content", "Images", "ContactPage", NewName)
+                  "Content", "Images", NewName)
                  , FileMode.OpenOrCreate, FileAccess.ReadWrite);
             file.CopyTo(fs);
             fs.Position = 0;
@@ -115,7 +115,7 @@ namespace Infrastructure.Repositories
             string NewName2 = Guid.NewGuid().ToString() + file2.FileName;
             FileStream fs2 = new FileStream(
                  Path.Combine(Directory.GetCurrentDirectory(),
-                  "Content", "Images", "ContactPage", NewName2)
+                  "Content", "Images", NewName2)
                  , FileMode.OpenOrCreate, FileAccess.ReadWrite);
             file2.CopyTo(fs2);
             fs2.Position = 0;
@@ -124,7 +124,7 @@ namespace Infrastructure.Repositories
             string NewName3 = Guid.NewGuid().ToString() + file3.FileName;
             FileStream fs3 = new FileStream(
                  Path.Combine(Directory.GetCurrentDirectory(),
-                  "Content", "Images", "ContactPage", NewName3)
+                  "Content", "Images", NewName3)
                  , FileMode.OpenOrCreate, FileAccess.ReadWrite);
             file3.CopyTo(fs3);
             fs3.Position = 0;
@@ -172,7 +172,7 @@ namespace Infrastructure.Repositories
             string NewName = Guid.NewGuid().ToString() + file.FileName;
             FileStream fs = new FileStream(
                  Path.Combine(Directory.GetCurrentDirectory(),
-                  "Content", "Images", "Icon", NewName)
+                  "Content", "Images", NewName)
                  , FileMode.OpenOrCreate, FileAccess.ReadWrite);
             file.CopyTo(fs);
             fs.Position = 0;

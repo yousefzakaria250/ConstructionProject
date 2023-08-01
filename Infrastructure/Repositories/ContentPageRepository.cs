@@ -2,8 +2,6 @@
 using Infrastructure.Construction_Context;
 using Infrastructure.Dtos;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ActionConstraints;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -80,7 +78,7 @@ namespace Infrastructure.Repositories
 
             FileStream fs = new FileStream(
                  Path.Combine(Directory.GetCurrentDirectory(),
-                  "Content", "Images", "ContentPage", NewName)
+                  "Content", "Images", NewName)
                  , FileMode.OpenOrCreate, FileAccess.ReadWrite);
             file.CopyTo(fs);
             fs.Position = 0;
@@ -107,7 +105,7 @@ namespace Infrastructure.Repositories
             string NewName = Guid.NewGuid().ToString() + file.FileName;
             FileStream fs = new FileStream(
                  Path.Combine(Directory.GetCurrentDirectory(),
-                  "Content", "Images", "ContentPage", NewName)
+                  "Content", "Images", NewName)
                  , FileMode.OpenOrCreate, FileAccess.ReadWrite);
             file.CopyTo(fs);
             fs.Position = 0;

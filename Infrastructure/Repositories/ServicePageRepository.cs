@@ -79,7 +79,7 @@ namespace Infrastructure.Repositories
             string NewName = Guid.NewGuid().ToString() + file.FileName;
             FileStream fs = new FileStream(
                  Path.Combine(Directory.GetCurrentDirectory(),
-                  "Content", "Images", "ServicePage", NewName)
+                  "Content", "Images", NewName)
                  , FileMode.OpenOrCreate, FileAccess.ReadWrite);
             file.CopyTo(fs);
             fs.Position = 0;
@@ -107,7 +107,7 @@ namespace Infrastructure.Repositories
             string NewName = Guid.NewGuid().ToString() + file.FileName;
             FileStream fs = new FileStream(
                  Path.Combine(Directory.GetCurrentDirectory(),
-                  "Content", "Images", "ServiceItem", NewName)
+                  "Content", "Images", NewName)
                  , FileMode.OpenOrCreate, FileAccess.ReadWrite);
             file.CopyTo(fs);
             fs.Position = 0;
