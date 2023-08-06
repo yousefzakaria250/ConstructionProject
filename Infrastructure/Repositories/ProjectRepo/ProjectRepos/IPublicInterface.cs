@@ -11,8 +11,8 @@ namespace Infrastructure.Repositories.ProjectRepo.ProjectRepos
     {
         public RModel Insert(TDto entity);
         public RModel Update(int id, TDto entity);
-        public IEnumerable<RModelDto> GetAll();
-        public RModelDto getById(int id);
+        public IEnumerable<RModelDto> GetAll(string Lang);
+        public RModelDto getById(int id,string lang);
         public bool Delete(int id);
     }
 }

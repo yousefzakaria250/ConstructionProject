@@ -32,10 +32,10 @@ namespace ConstructionAPIs.Controllers
         }
 
         [HttpGet("GetAll")]
-        public IActionResult Get()
+        public IActionResult Get(string Lang)
         {
 
-            return Ok(solutionRepo.GetAll());
+            return Ok(solutionRepo.GetAll(Lang));
         }
 
 
@@ -49,10 +49,10 @@ namespace ConstructionAPIs.Controllers
             return BadRequest("لم يتم الحذف حاول مره اخري");
         }
         [HttpGet("GetsolutionPageByID")]
-        public IActionResult GetById(int id)
+        public IActionResult GetById(int id,string Lang)
         {
             if (id != null)
-                return Ok(this.solutionRepo.getById(id));
+                return Ok(this.solutionRepo.getById(id, Lang));
             return BadRequest("solution Page ID is Missing");
         }
 

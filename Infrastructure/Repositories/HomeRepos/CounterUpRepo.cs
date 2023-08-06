@@ -47,66 +47,127 @@ namespace Infrastructure.Repositories.HomeRepos
             }
         }
 
-    public IEnumerable<counterUpInfoDto> GetAll()
+    public IEnumerable<counterUpInfoDto> GetAll(string Lang)
         {
-            IEnumerable<counterUpInfoDto> counterUps = constructionContext.counterUps
-        .Include(p => p.Counter)
-              .Select(p => new
+            if (Lang == "en")
+            {
+                IEnumerable<counterUpInfoDto> counterUps = constructionContext.counterUps
+            .Include(p => p.Counter)
+                  .Select(p => new
 
-                  counterUpInfoDto
-              {
-                  Id = p.Id,
-                  BgImage = p.BgImage,
-
-                  Counter = p.Counter.Select(pi => new CounterInfoDto
+                      counterUpInfoDto
                   {
-                      Id = pi.Id,
-                      desc = pi.desc,
-                      count = pi.count,
-                      icon = pi.icon,
-                  }).ToList()
-              }).ToList();
-            return counterUps;
+                      Id = p.Id,
+                      BgImage = p.BgImage,
+
+                      Counter = p.Counter.Select(pi => new CounterInfoDto
+                      {
+                          Id = pi.Id,
+
+                          desc = pi.ENdesc,
+                          count = pi.count,
+                          icon = pi.icon,
+                      }).ToList()
+                  }).ToList();
+                return counterUps;
+            }
+            else
+            {
+                IEnumerable<counterUpInfoDto> counterUps = constructionContext.counterUps
+                .Include(p => p.Counter)
+               .Select(p => new
+
+                   counterUpInfoDto
+               {
+                   Id = p.Id,
+                   BgImage = p.BgImage,
+
+                   Counter = p.Counter.Select(pi => new CounterInfoDto
+                   {
+                       Id = pi.Id,
+                       desc = pi.ARdesc,
+                       count = pi.count,
+                       icon = pi.icon,
+                   }).ToList()
+               }).ToList();
+                return counterUps;
+            }
 
         }
 
-        public counterUpInfoDto getById(int id)
+        public counterUpInfoDto getById(int id,string Lang)
         {
-            var counterUp = constructionContext.counterUps
-            .Include(p => p.Counter)
-
-            .FirstOrDefault(p => p.Id == id);
-            if (counterUp != null)
+            if (Lang == "en")
             {
-                if (counterUp.Counter.Count != 0)
+                var counterUp = constructionContext.counterUps
+                .Include(p => p.Counter)
+
+                .FirstOrDefault(p => p.Id == id);
+                if (counterUp != null)
                 {
-                    var counterInfoDto = counterUp.Counter.Select(pi => new CounterInfoDto
+                    if (counterUp.Counter.Count != 0)
                     {
-                        Id = pi.Id,
-                        desc = pi.desc,
-                        count = pi.count,
-                        icon = pi.icon,
-                    }).ToList();
-                    var counterUpInfoDto = new counterUpInfoDto
+                        var counterInfoDto = counterUp.Counter.Select(pi => new CounterInfoDto
+                        {
+                            Id = pi.Id,
+                            desc = pi.ENdesc,
+                            count = pi.count,
+                            icon = pi.icon,
+                        }).ToList();
+                        var counterUpInfoDto = new counterUpInfoDto
+                        {
+                            BgImage = counterUp.BgImage
+
+                        };
+                        return counterUpInfoDto;
+                    }
+                    var counterUpInfoDto1 = new counterUpInfoDto
                     {
                         BgImage = counterUp.BgImage
 
                     };
-                    return counterUpInfoDto;
+
+                    return counterUpInfoDto1;
                 }
-                var counterUpInfoDto1 = new counterUpInfoDto
-                {
-                    BgImage = counterUp.BgImage
-
-                };
-
-                return counterUpInfoDto1;
             }
+            else
+            {
+                var counterUp = constructionContext.counterUps
+                .Include(p => p.Counter)
 
+                .FirstOrDefault(p => p.Id == id);
+                if (counterUp != null)
+                {
+                    if (counterUp.Counter.Count != 0)
+                    {
+                        var counterInfoDto = counterUp.Counter.Select(pi => new CounterInfoDto
+                        {
+                            Id = pi.Id,
+                            desc = pi.ARdesc,
+                            count = pi.count,
+                            icon = pi.icon,
+                        }).ToList();
+                        var counterUpInfoDto = new counterUpInfoDto
+                        {
+                            BgImage = counterUp.BgImage
 
+                        };
+                        return counterUpInfoDto;
+                    }
+                    var counterUpInfoDto1 = new counterUpInfoDto
+                    {
+                        BgImage = counterUp.BgImage
+
+                    };
+
+                    return counterUpInfoDto1;
+                }
                 return null;
+            }
+            return null;
         }
 
+        
             public CounterUp Insert(counterUpAddDto entity)
         {
             var data = mapper.Map<CounterUp>(entity);

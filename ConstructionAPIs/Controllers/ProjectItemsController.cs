@@ -44,15 +44,15 @@ namespace ConstructionAPIs.Controllers
 
 
         [HttpGet("GetAll")]
-        public IActionResult Get()
+        public IActionResult Get(string Lang)
         {
-            return Ok(ProjectItemsRepo.GetAll());
+            return Ok(ProjectItemsRepo.GetAll(Lang));
         }
         [HttpGet("GetProjectItemsByID")]
-        public IActionResult GetById(int id)
+        public IActionResult GetById(int id,string Lang)
         {
             if (id != null)
-                return Ok(this.ProjectItemsRepo.getById(id));
+                return Ok(this.ProjectItemsRepo.getById(id, Lang));
             return BadRequest("ProjectItem  ID is Missing");
         }
 

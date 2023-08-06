@@ -35,11 +35,10 @@ namespace Infrastructure.Repositories.HomeRepos
             throw new NotImplementedException();
         }
 
-        public IEnumerable<HomepageInfoDto> GetAll()
+        public IEnumerable<HomepageInfoDto> GetAll(string Lang)
         {
-            var res = constructionContext.homePages.ToList();
 
-            
+            var res = constructionContext.homePages.ToList();         
             List<HomepageInfoDto> homepageList=new List<HomepageInfoDto>();
             foreach (var item in res)
             {
@@ -89,7 +88,7 @@ namespace Infrastructure.Repositories.HomeRepos
             //return res;
         }
 
-        public HomepageInfoDto getById(int id)
+        public HomepageInfoDto getById(int id,string lang)
         {
             throw new NotImplementedException();
         }

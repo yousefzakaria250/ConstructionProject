@@ -25,55 +25,111 @@ namespace Infrastructure.Repositories.ProjectRepo.ProjectRepos
             this.constructionContext = _constructionContext;
         }
 
-        public IEnumerable<ProjectInfoDto> GetAll()
+        public IEnumerable<ProjectInfoDto> GetAll(string Lang)
         {
-            IEnumerable<ProjectInfoDto> projectPages = constructionContext.Project
-            .Include(p => p.projects)
-                .Select(p => new
+            if (Lang == "en")
+            {
+                IEnumerable<ProjectInfoDto> projectPages = constructionContext.Project
+                .Include(p => p.projects)
+                    .Select(p => new
 
-                    ProjectInfoDto
-                {
-                   title=p.title,      
+                        ProjectInfoDto
+                    {
+                        title = p.ENtitle,
                         projectItems = p.projects.Select(pi => new ProjectItemsInfoDto
                         {
                             Id = pi.Id,
                             image = pi.image,
-                            desc1 = pi.desc1,
-                            title = pi.title,
-                            desc2 = pi.desc2,
+                            desc1 = pi.ENdesc1,
+                            title = pi.ENtitle,
+                            desc2 = pi.ENdesc2,
                         }).ToList()
-                }).ToList();
-            return projectPages;
-        }
-        public ProjectInfoDto getById(int id)
-        {
-            var projectPage = constructionContext.Project
-         .Include(p => p.projects)
-         
-         .FirstOrDefault(p => p.Id == id);
-            if (projectPage != null)
-            {
-                if (projectPage.projects != null)
-                {
-                    var projectItemsDto = projectPage.projects.Select(pi => new ProjectItemsInfoDto
-                    {
-                        Id = pi.Id,
-                        image = pi.image,
-                        desc1 = pi.desc1,
-                        title = pi.title,
-                        desc2 = pi.desc2
                     }).ToList();
-                }
-                var projectPageDto = new ProjectInfoDto
-                {
-                    title = projectPage.title,
-
-                };
-
-                return projectPageDto;
-
+                return projectPages;
             }
-            return null;
+            else
+            {
+                IEnumerable<ProjectInfoDto> projectPages = constructionContext.Project
+              .Include(p => p.projects)
+                  .Select(p => new
+
+                      ProjectInfoDto
+                  {
+                      title = p.ARtitle,
+                      projectItems = p.projects.Select(pi => new ProjectItemsInfoDto
+                      {
+                          Id = pi.Id,
+                          image = pi.image,
+                          desc1 = pi.ARdesc1,
+                          title = pi.ARtitle,
+                          desc2 = pi.ARdesc2,
+                      }).ToList()
+                  }).ToList();
+                return projectPages;
+            }
+        }
+        public ProjectInfoDto getById(int id,string Lang)
+        {
+            if (Lang == "en") {
+                var projectPage = constructionContext.Project
+         .Include(p => p.projects)
+
+         .FirstOrDefault(p => p.Id == id);
+                if (projectPage != null)
+                {
+                    if (projectPage.projects != null)
+                    {
+                        var projectItemsDto = projectPage.projects.Select(pi => new ProjectItemsInfoDto
+                        {
+                            Id = pi.Id,
+                            image = pi.image,
+                            desc1 = pi.ENdesc1,
+                            title = pi.ENtitle,
+                            desc2 = pi.ENdesc2
+                        }).ToList();
+                    }
+                    var projectPageDto = new ProjectInfoDto
+                    {
+                        title = projectPage.ENtitle,
+
+                    };
+
+                    return projectPageDto;
+
+                }
+                return null;
+            }
+            else
+            {
+                var projectPage = constructionContext.Project
+         .Include(p => p.projects)
+
+         .FirstOrDefault(p => p.Id == id);
+                if (projectPage != null)
+                {
+                    if (projectPage.projects != null)
+                    {
+                        var projectItemsDto = projectPage.projects.Select(pi => new ProjectItemsInfoDto
+                        {
+                            Id = pi.Id,
+                            image = pi.image,
+                            desc1 = pi.ARdesc1,
+                            title = pi.ARtitle,
+                            desc2 = pi.ARdesc2
+                        }).ToList();
+                    }
+                    var projectPageDto = new ProjectInfoDto
+                    {
+                        title = projectPage.ARtitle,
+
+                    };
+
+                    return projectPageDto;
+
+                }
+                return null;
+            }
+            
         }
 
         public Project Insert(ProjectAddDto entity)
@@ -100,8 +156,6 @@ namespace Infrastructure.Repositories.ProjectRepo.ProjectRepos
             }
             return null;
         }
-
-
         public bool Delete(int id)
         {
             try

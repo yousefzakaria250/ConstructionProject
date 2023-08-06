@@ -50,15 +50,23 @@ namespace Infrastructure.Repositories.SolutionRepos
 
             }
 
-            public IEnumerable<SolutionItemsInfoDto> GetAll()
+            public IEnumerable<SolutionItemsInfoDto> GetAll(string Lang)
             {
                 List<solutionItems> solutionItemsDb = constructionContext.solutionItems.ToList();
                 List<SolutionItemsInfoDto> SolutionItemsInfoDtos = new List<SolutionItemsInfoDto>();
                 foreach (var item in solutionItemsDb)
                 {
                     SolutionItemsInfoDto solutiontemsInfo = new SolutionItemsInfoDto();
-                    solutiontemsInfo.title = item.title;
-                    solutiontemsInfo.desc = item.desc;
+                if (Lang == "en")
+                {
+                    solutiontemsInfo.title = item.ENtitle;
+                    solutiontemsInfo.desc = item.ENdesc;
+                }
+                else
+                {
+                    solutiontemsInfo.title = item.ARtitle;
+                    solutiontemsInfo.desc = item.ARdesc;
+                }
                     solutiontemsInfo.image = item.image;
                     solutiontemsInfo.Id = item.Id;
                     SolutionItemsInfoDtos.Add(solutiontemsInfo);
@@ -66,17 +74,26 @@ namespace Infrastructure.Repositories.SolutionRepos
                 return SolutionItemsInfoDtos;
             }
 
-            public SolutionItemsInfoDto getById(int id)
+            public SolutionItemsInfoDto getById(int id,string Lang)
             {
                 var res = this.constructionContext.solutionItems
                      .FirstOrDefault(prop => prop.Id == id)!;
                 if (res == null)
                     return null;
                 SolutionItemsInfoDto solutionitems = new SolutionItemsInfoDto();
-                solutionitems.desc = res.desc;
+            if (Lang == "en")
+            {
+                solutionitems.desc = res.ENdesc;
+                solutionitems.title = res.ENtitle;
+            }
+            else
+            {
+                solutionitems.desc = res.ARdesc;
+                solutionitems.title = res.ARtitle;
+            }
                 solutionitems.Id = res.Id;
                 solutionitems.image = res.image;
-                solutionitems.title = res.title;
+                
                 return solutionitems;
 
             }
@@ -98,7 +115,7 @@ namespace Infrastructure.Repositories.SolutionRepos
         public async void uploadImage(IFormFile image, Guid imageId)
         {
 
-            string uploadFolder = Path.Combine(webHostEnvironment.WebRootPath, "images", "ProductsImages");
+            string uploadFolder = Path.Combine(webHostEnvironment.WebRootPath, "Images");
             string imageName = imageId.ToString() + "_" + image.FileName;
             string filePath = Path.Combine(uploadFolder, imageName);
             using (var fileStream = new FileStream(filePath, FileMode.Create))

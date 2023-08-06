@@ -33,15 +33,15 @@ namespace ConstructionAPIs.Controllers
         }
 
         [HttpGet("GetAll")]
-        public IActionResult Get()
+        public IActionResult Get(string Lang)
         {
-            return Ok(solutionPageRepo.GetAll());
+            return Ok(solutionPageRepo.GetAll(Lang));
         }
         [HttpGet("GetsolutionPageByID")]
-        public IActionResult GetById(int id)
+        public IActionResult GetById(int id,string Lang)
         {
             if (id != null)
-                return Ok(this.solutionPageRepo.getById(id));
+                return Ok(this.solutionPageRepo.getById(id, Lang));
             return BadRequest("Solution Page ID is Missing");
         }
 

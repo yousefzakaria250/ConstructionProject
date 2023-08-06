@@ -10,7 +10,8 @@ namespace Data.Models.Project
 {
     public class Project:EntityBase
     {
-        public string title { get; set; }
+        public string ENtitle { get; set; }
+        public string ARtitle { get; set; }
         [ForeignKey("Page")]
         public int ProjectPAgeId { get; set; }
         public ProjectPage Page { get; set; }

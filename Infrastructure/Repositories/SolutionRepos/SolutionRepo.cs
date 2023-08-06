@@ -24,48 +24,99 @@ namespace Infrastructure.Repositories.SolutionRepos
             this.constructionContext = _constructionContext;
         }
 
-        public IEnumerable<SolutionInfoDto> GetAll()
+        public IEnumerable<SolutionInfoDto> GetAll(string Lang)
         {
-            IEnumerable<SolutionInfoDto> solutionPages = constructionContext.solution
+            if (Lang == "en")
+            {
+                IEnumerable<SolutionInfoDto> solutionPages = constructionContext.solution
           .Include(p => p.solutions)
                 .Select(p => new
 
                     SolutionInfoDto
                 {
-                    title = p.title,
+                    title = p.ENtitle,
 
                     solutionItems = p.solutions.Select(pi => new SolutionItemsInfoDto
                     {
                         Id = pi.Id,
                         image = pi.image,
-                        desc = pi.desc,
-                        title = pi.title,
+                        desc = pi.ENdesc,
+                        title = pi.ENtitle,
                     }).ToList()
                 }).ToList();
-            return solutionPages;
+                return solutionPages;
+            }
+
+            else
+            {
+                IEnumerable<SolutionInfoDto> solutionPages = constructionContext.solution
+          .Include(p => p.solutions)
+                .Select(p => new
+
+                    SolutionInfoDto
+                {
+                    title = p.ARtitle,
+
+                    solutionItems = p.solutions.Select(pi => new SolutionItemsInfoDto
+                    {
+                        Id = pi.Id,
+                        image = pi.image,
+                        desc = pi.ARdesc,
+                        title = pi.ARtitle,
+                    }).ToList()
+                }).ToList();
+                return solutionPages;
+            }
+           
         }
-        public SolutionInfoDto getById(int id)
+        public SolutionInfoDto getById(int id,string Lang)
         {
-            var solutionPage = constructionContext.solution
+            if (Lang == "en") {
+                var solutionPage = constructionContext.solution
          .Include(p => p.solutions)
 
          .FirstOrDefault(p => p.Id == id);
 
-            var solutionItemsDto = solutionPage.solutions.Select(pi => new SolutionItemsInfoDto
-            {
-                Id = pi.Id,
-                image = pi.image,
-                desc = pi.desc,
-                title = pi.title,
-            }).ToList();
+                var solutionItemsDto = solutionPage.solutions.Select(pi => new SolutionItemsInfoDto
+                {
+                    Id = pi.Id,
+                    image = pi.image,
+                    desc = pi.ENdesc,
+                    title = pi.ENtitle,
+                }).ToList();
 
-            var solutionPageDto = new SolutionInfoDto
-            {
-                title = solutionPage.title,
+                var solutionPageDto = new SolutionInfoDto
+                {
+                    title = solutionPage.ENtitle,
 
-            };
+                };
 
-            return solutionPageDto;
+                return solutionPageDto;
+            }
+
+            else {
+                var solutionPage = constructionContext.solution
+         .Include(p => p.solutions)
+
+         .FirstOrDefault(p => p.Id == id);
+
+                var solutionItemsDto = solutionPage.solutions.Select(pi => new SolutionItemsInfoDto
+                {
+                    Id = pi.Id,
+                    image = pi.image,
+                    desc = pi.ARdesc,
+                    title = pi.ARtitle,
+                }).ToList();
+
+                var solutionPageDto = new SolutionInfoDto
+                {
+                    title = solutionPage.ARtitle,
+
+                };
+
+                return solutionPageDto;
+            }
+            
         }
 
         public solution Insert(SolutionAddDto entity)

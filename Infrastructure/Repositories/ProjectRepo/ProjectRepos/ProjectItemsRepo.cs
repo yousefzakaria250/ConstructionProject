@@ -47,16 +47,25 @@ namespace Infrastructure.Repositories.ProjectRepo.ProjectRepos
         
         }
 
-        public IEnumerable<ProjectItemsInfoDto> GetAll()
+        public IEnumerable<ProjectItemsInfoDto> GetAll(string Lang)
         {
            List<ProjectItems> ProjectItemsDb= constructionContext.ProjectItems.ToList();
             List<ProjectItemsInfoDto> projectItemsInfoDtos = new List<ProjectItemsInfoDto>(); 
             foreach(var item in ProjectItemsDb)
             {
                 ProjectItemsInfoDto projectItemsInfo = new ProjectItemsInfoDto();
-                projectItemsInfo.title = item.title;
-                projectItemsInfo.desc1 = item.desc1;
-                projectItemsInfo.desc2 = item.desc2;
+                if (Lang == "en")
+                {
+                    projectItemsInfo.title = item.ENtitle;
+                    projectItemsInfo.desc1 = item.ENdesc1;
+                    projectItemsInfo.desc2 = item.ENdesc2;
+                }
+                else
+                {
+                    projectItemsInfo.title = item.ARtitle;
+                    projectItemsInfo.desc1 = item.ARdesc1;
+                    projectItemsInfo.desc2 = item.ARdesc2;
+                }
                 projectItemsInfo.image = item.image;
                 projectItemsInfo.Id = item.Id;
                 projectItemsInfoDtos.Add(projectItemsInfo);
@@ -64,18 +73,28 @@ namespace Infrastructure.Repositories.ProjectRepo.ProjectRepos
             return projectItemsInfoDtos;
         }
 
-        public ProjectItemsInfoDto getById(int id)
+        public ProjectItemsInfoDto getById(int id,string Lang)
         {
             var res = this.constructionContext.ProjectItems
                  .FirstOrDefault(prop => prop.Id == id)!;
             if (res == null)
                 return null;
             ProjectItemsInfoDto projectItems = new ProjectItemsInfoDto();
-            projectItems.desc1 = res.desc1;
-            projectItems.desc2 = res.desc2;
+            if (Lang == "en")
+            {
+                projectItems.desc1 = res.ENdesc1;
+                projectItems.desc2 = res.ENdesc2;
+                projectItems.title = res.ENtitle;
+            }
+            else
+            {
+                projectItems.desc1 = res.ARdesc1;
+                projectItems.desc2 = res.ARdesc2;
+                projectItems.title = res.ARtitle;
+            }
             projectItems.Id = res.Id;
             projectItems.image = res.image;
-            projectItems.title = res.title;
+            
             return projectItems;
 
         }
@@ -95,7 +114,7 @@ namespace Infrastructure.Repositories.ProjectRepo.ProjectRepos
 
             FileStream fs = new FileStream(
                Path.Combine(Directory.GetCurrentDirectory(),
-                "Content", "images", "Section", NewName)
+                "Content", "Images", NewName)
                , FileMode.OpenOrCreate, FileAccess.ReadWrite);
             await image.CopyToAsync(fs);
         }

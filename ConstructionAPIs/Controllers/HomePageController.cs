@@ -36,15 +36,15 @@ namespace ConstructionAPIs.Controllers
         }
 
         [HttpGet("GetAll")]
-        public IActionResult Get()
+        public IActionResult Get(string Lang)
         {
-            return Ok(homePageRepo.GetAll());
+            return Ok(homePageRepo.GetAll(Lang));
         }
         [HttpGet("GetProjectPageByID")]
-        public IActionResult GetById(int id)
+        public IActionResult GetById(int id,string Lang)
         {
             if (id >=0)
-                return Ok(this.homePageRepo.getById(id));
+                return Ok(this.homePageRepo.getById(id, Lang));
             return BadRequest("Project Page ID is Missing");
         }
 

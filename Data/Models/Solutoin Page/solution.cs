@@ -10,7 +10,8 @@ namespace Data.Models.Solutoin_Page
 {
     public class solution:EntityBase
     {
-        public string title { get; set; }
+        public string ENtitle { get; set; }
+        public string ARtitle { get; set; }
         [ForeignKey("SPage")]
         public int SolutionPageID { get; set; }
         public solutionPage SPage { get; set; }

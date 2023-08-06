@@ -12,9 +12,11 @@ namespace Infrastructure.Dtos.ProjectDto
 
     public class ProjectAddDto
     {
-        public string header { get; set; }
+        public string ENheader { get; set; }
+        public string ARheader { get; set; }
  
-        public string title { get; set; }
+        public string ENtitle { get; set; }
+        public string ARtitle { get; set; }
 
         public int ProjectPageID { get; set; }
         

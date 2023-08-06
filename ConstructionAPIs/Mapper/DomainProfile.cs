@@ -28,72 +28,60 @@ namespace Infrastructure.Mapper
 {
     public class DomainProfile : Profile
     {
-        private readonly IWebHostEnvironment webHostEnvironment;
+       
 
-        public DomainProfile(IWebHostEnvironment _webHostEnvironment)
-        {
-            webHostEnvironment = _webHostEnvironment;
-        }
+       
         public DomainProfile() { 
             CreateMap<ProjectPageAddDto, ProjectPage>()
                    .ForMember(dest => dest.bg, opt => opt.MapFrom(src =>
-                  uploadImage(src.bgImage, "ProjectPage")));
+                  uploadImage(src.bgImage)));
                     //Project Mapper
                    CreateMap<ProjectAddDto, Project>();
             //ProjectItems Mapper
             CreateMap<ProjectItemsAddDto, ProjectItems>()
             .ForMember(dest => dest.image, opt => opt.MapFrom(src =>
-           uploadImage(src.image, "ProjectItems")));
+           uploadImage(src.image)));
 
             //Solution MApper
             CreateMap<SolutionPageAddDto, solutionPage>()
                   .ForMember(dest => dest.bgImage, opt => opt.MapFrom(src =>
-                 uploadImage(src.bgImage,"")));
+                 uploadImage(src.bgImage)));
             //Project Mapper
             CreateMap<SolutionAddDto, solution>();
             //solutionitems Mapper
             CreateMap<SolutionItemsAddDto, solutionItems>()
             .ForMember(dest => dest.image, opt => opt.MapFrom(src =>
-           uploadImage(src.image,"")));
+           uploadImage(src.image)));
 
             //counter Mapper
             CreateMap<CounterAddDto, Counter>()
             .ForMember(dest => dest.icon, opt => opt.MapFrom(src =>
-           uploadImage(src.icon, "Counter")));
+           uploadImage(src.icon)));
 
             // CounterUp Mapper
             CreateMap<counterUpAddDto, CounterUp>()
            .ForMember(dest => dest.BgImage, opt => opt.MapFrom(src =>
-           uploadImage(src.BgImage, "CounterUP")));
+           uploadImage(src.BgImage)));
             //Slider Mapper
             CreateMap<SliderAddDto, slider>()
            .ForMember(dest => dest.BgImage, opt => opt.MapFrom(src =>
-          uploadImage(src.BgImage, "slider")));
+          uploadImage(src.BgImage)));
             //HomePage Mapper
             CreateMap<homePageAddDto, HomePage>()
            .ForMember(dest => dest.logoImage, opt => opt.MapFrom(src =>
-          uploadImage(src.Logo, "HomePage")));
+          uploadImage(src.Logo)));
         }
-        public  async Task<string> uploadImage(IFormFile image,string filepath)//, Guid imageId)
+        public  async Task<string> uploadImage(IFormFile image)//, Guid imageId)
         {
-            //var ImageGuid = new Guid();
-            //string uploadFolder = Path.Combine(webHostEnvironment.WebRootPath, "images", "ProductsImages");
-            //string imageName = ImageGuid.ToString() + "_" + image.FileName;
-            //string filePath = Path.Combine(uploadFolder, imageName);
-            //using (var fileStream = new FileStream(filePath, FileMode.Create))
-            //{
-            //     image.CopyTo(fileStream);
-            //    fileStream.Close();
-
-            //}
             //return ImageGuid.ToString() + "_" + image.FileName;
             string NewName = Guid.NewGuid().ToString() + image.FileName;
-
             FileStream fs = new FileStream(
                Path.Combine(Directory.GetCurrentDirectory(),
-                "Content", "images", filepath, NewName)
+                "Content", "Images", NewName)
                , FileMode.OpenOrCreate, FileAccess.ReadWrite);
-                 await image.CopyToAsync(fs);
+                  image.CopyTo(fs);
+               // fs.Close();
+                fs.Position = 0;
             return NewName;
 
         }

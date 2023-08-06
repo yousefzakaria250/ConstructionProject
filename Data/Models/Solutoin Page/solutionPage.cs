@@ -9,7 +9,8 @@ namespace Data.Models.Solutoin_Page
 {
     public class solutionPage:EntityBase
     {
-        public string header { get; set; }
+        public string ENheader { get; set; }
+        public string ARheader { get; set; }
         public string bgImage { get; set; }
         public solution solution { set; get; }
     }

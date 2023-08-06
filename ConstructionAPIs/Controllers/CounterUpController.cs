@@ -34,10 +34,10 @@ namespace ConstructionAPIs.Controllers
         }
 
         [HttpGet("GetAll")]
-        public IActionResult Get()
+        public IActionResult Get(string Lang)
         {
 
-            return Ok(counterUp.GetAll());
+            return Ok(counterUp.GetAll(Lang));
         }
 
 
@@ -51,11 +51,11 @@ namespace ConstructionAPIs.Controllers
             return BadRequest("لم يتم الحذف حاول مره اخري");
         }
         [HttpGet("GetcounterUpByID")]
-        public IActionResult GetById(int id)
+        public IActionResult GetById(int id,string Lang)
         {
 
-            if (this.counterUp.getById(id) != null)
-                return Ok(this.counterUp.getById(id));
+            if (this.counterUp.getById(id, Lang) != null)
+                return Ok(this.counterUp.getById(id, Lang));
             return BadRequest("Wrong Project ID");
         }
 

@@ -11,7 +11,8 @@ namespace Infrastructure.Dtos.HomeDtos.Counter
     {
         public IFormFile icon { get; set; }
         public int count { get; set; }
-        public string desc { get; set; }
+        public string ENdesc { get; set; }
+        public string ARdesc { get; set; }
         public int counterUpId { get; set; }
     }
 }

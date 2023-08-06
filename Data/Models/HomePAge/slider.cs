@@ -9,11 +9,10 @@ namespace Data.Models.HomePAge
     public class slider:EntityBase
     {
         public string BgImage { get; set; }
-        public string Title { get; set; }
-        public string desc { get; set; }
-       // public string LearnMoreBtn { get; set; }
-       // public string btn2 { get; set; }
-
+        public string ENTitle { get; set; }
+        public string ARTitle { get; set; }
+        public string ARdesc { get; set; }
+        public string ENdesc { get; set; }
 
     }
 }

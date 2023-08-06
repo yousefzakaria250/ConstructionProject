@@ -9,7 +9,8 @@ namespace Infrastructure.Dtos.ProjectPageDto
 {
     public class ProjectPageAddDto
     {
-        public string header { get; set; }
+        public string ENheader { get; set; }
+        public string ARheader { get; set; }
         public IFormFile bgImage { get; set; }
        
     }

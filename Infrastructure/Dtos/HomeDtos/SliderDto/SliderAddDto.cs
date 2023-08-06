@@ -10,8 +10,10 @@ namespace Infrastructure.Dtos.HomeDtos.SliderDto
     public class SliderAddDto
     {
         public IFormFile BgImage { get; set; }
-        public string desc { get; set; }
-        public string title { get; set; }
+        public string ENdesc { get; set; }
+        public string ARdesc { get; set; }
+        public string ENtitle { get; set; }
+        public string ARtitle { get; set; }
 
 
     }

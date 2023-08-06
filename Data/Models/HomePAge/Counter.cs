@@ -11,7 +11,8 @@ namespace Data.Models.HomePAge
     {
         public string icon { get; set; }
         public int count { get; set; }
-        public string desc { get; set; }
+        public string ENdesc { get; set; }
+        public string ARdesc { get; set; }
 
         [ForeignKey("counterup")]
         public int counterUpId { set; get; }

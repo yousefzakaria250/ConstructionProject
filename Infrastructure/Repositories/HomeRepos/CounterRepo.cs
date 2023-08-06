@@ -46,7 +46,7 @@ namespace Infrastructure.Repositories.HomeRepos
 
         }
 
-        public IEnumerable<CounterInfoDto> GetAll()
+        public IEnumerable<CounterInfoDto> GetAll(string Lang)
         {
             
             List<Counter> counterDb = constructionContext.counters.ToList();
@@ -55,7 +55,14 @@ namespace Infrastructure.Repositories.HomeRepos
             {
                 CounterInfoDto counterInfoDto = new CounterInfoDto();
                 counterInfoDto.Id = item.Id;
-                counterInfoDto.desc = item.desc;
+                if (Lang == "en")
+                {
+                    counterInfoDto.desc = item.ENdesc;
+                }
+                else
+                {
+                    counterInfoDto.desc = item.ARdesc;
+                }
                 counterInfoDto.count = item.count;
                 counterInfoDto.icon = item.icon;
 
@@ -64,14 +71,21 @@ namespace Infrastructure.Repositories.HomeRepos
             return counterInfoDtos;
         }
 
-        public CounterInfoDto getById(int id)
+        public CounterInfoDto getById(int id,string Lang)
         {
             var res = this.constructionContext.counters
                .FirstOrDefault(prop => prop.Id == id)!;
             if (res == null)
                 return null;
             CounterInfoDto counter = new CounterInfoDto();
-            counter.desc = res.desc;
+            if (Lang == "en")
+            {
+                counter.desc = res.ENdesc;
+            }
+            else
+            {
+                counter.desc = res.ARdesc;
+            }
             counter.Id = res.Id;
             counter.icon = res.icon;
             counter.count = res.count;
@@ -96,7 +110,7 @@ namespace Infrastructure.Repositories.HomeRepos
 
             FileStream fs = new FileStream(
                Path.Combine(Directory.GetCurrentDirectory(),
-                "Content", "images", "Counter", NewName)
+                "Content", "Images", NewName)
                , FileMode.OpenOrCreate, FileAccess.ReadWrite);
             await image.CopyToAsync(fs);
         }

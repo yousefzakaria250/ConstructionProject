@@ -9,7 +9,8 @@ namespace Infrastructure.Dtos.DtoSolution.SolutionPageDto
 {
     public class SolutionPageAddDto
     {
-        public string header { get; set; }
+        public string ENheader { get; set; }
+        public string ARheader { get; set; }
         public IFormFile bgImage { get; set; }
     }
 }

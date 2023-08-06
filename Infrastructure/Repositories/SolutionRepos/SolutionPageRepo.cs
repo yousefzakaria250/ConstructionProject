@@ -30,66 +30,128 @@ namespace Infrastructure.Repositories.SolutionRepos
             webHostEnvironment = _webHostEnvironment;
         }
       
-        public SolutionPageInfoDto getById(int id)
+        public SolutionPageInfoDto getById(int id,string Lang)
         {
-            var SolutionPage = constructionContext.SolutionPage
+            if (Lang == "en")
+            {
+                var SolutionPage = constructionContext.SolutionPage
          .Include(p => p.solution)
           .ThenInclude(p => p.solutions)
          .FirstOrDefault(p => p.Id == id);
 
-            var solutionItemsDto = SolutionPage.solution.solutions.Select(pi => new SolutionItemsInfoDto
-            {
-                Id = pi.Id,
-                image = pi.image,
-                desc = pi.desc,
-                title = pi.title,
-            }).ToList();
-            var solutionDto = new SolutionInfoDto
-            {
-                title = SolutionPage.solution.title,
-                solutionItems = solutionItemsDto
-            };
+                var solutionItemsDto = SolutionPage.solution.solutions.Select(pi => new SolutionItemsInfoDto
+                {
+                    Id = pi.Id,
+                    image = pi.image,
+                    desc = pi.ENdesc,
+                    title = pi.ENtitle,
+                }).ToList();
+                var solutionDto = new SolutionInfoDto
+                {
+                    title = SolutionPage.solution.ENtitle,
+                    solutionItems = solutionItemsDto
+                };
 
-            var SolutionPageDto = new SolutionPageInfoDto
-            {
-                header = SolutionPage.header,
-                bg = SolutionPage.bgImage,
-                solutionInfoDto = solutionDto
-            };
+                var SolutionPageDto = new SolutionPageInfoDto
+                {
+                    header = SolutionPage.ENheader,
+                    bg = SolutionPage.bgImage,
+                    solutionInfoDto = solutionDto
+                };
 
-            return SolutionPageDto;
+                return SolutionPageDto;
+            }
+            else
+            {
+                var SolutionPage = constructionContext.SolutionPage
+         .Include(p => p.solution)
+          .ThenInclude(p => p.solutions)
+         .FirstOrDefault(p => p.Id == id);
+
+                var solutionItemsDto = SolutionPage.solution.solutions.Select(pi => new SolutionItemsInfoDto
+                {
+                    Id = pi.Id,
+                    image = pi.image,
+                    desc = pi.ARdesc,
+                    title = pi.ARtitle,
+                }).ToList();
+                var solutionDto = new SolutionInfoDto
+                {
+                    title = SolutionPage.solution.ARtitle,
+                    solutionItems = solutionItemsDto
+                };
+
+                var SolutionPageDto = new SolutionPageInfoDto
+                {
+                    header = SolutionPage.ARheader,
+                    bg = SolutionPage.bgImage,
+                    solutionInfoDto = solutionDto
+                };
+
+                return SolutionPageDto;
+            }
+           
         }
 
-        public IEnumerable<SolutionPageInfoDto> GetAll()
-        {
-            IEnumerable<SolutionPageInfoDto> SolutionPages = constructionContext.SolutionPage
+        public IEnumerable<SolutionPageInfoDto> GetAll(string Lang)
+        { 
+            if(Lang=="en"){
+                IEnumerable<SolutionPageInfoDto> SolutionPages = constructionContext.SolutionPage
           .Include(p => p.solution)
          .ThenInclude(p => p.solutions)
                 .Select(p => new
 
                     SolutionPageInfoDto
                 {
-                    header = p.header,
+                    header = p.ENheader,
                     bg = p.bgImage,
                     solutionInfoDto = new SolutionInfoDto
                     {
-                        title = p.solution.title,
+                        title = p.solution.ENtitle,
                         solutionItems = p.solution.solutions.Select(pi => new SolutionItemsInfoDto
                         {
                             Id = pi.Id,
                             image = pi.image,
-                            desc = pi.desc,
-                            title = pi.title,
+                            desc = pi.ENdesc,
+                            title = pi.ENtitle,
                         }).ToList()
                     }
 
                 }).ToList();
-            return SolutionPages;
+                return SolutionPages;
+            }
+
+            else {
+                IEnumerable<SolutionPageInfoDto> SolutionPages = constructionContext.SolutionPage
+          .Include(p => p.solution)
+         .ThenInclude(p => p.solutions)
+                .Select(p => new
+
+                    SolutionPageInfoDto
+                {
+                    header = p.ENheader,
+                    bg = p.bgImage,
+                    solutionInfoDto = new SolutionInfoDto
+                    {
+                        title = p.solution.ARtitle,
+                        solutionItems = p.solution.solutions.Select(pi => new SolutionItemsInfoDto
+                        {
+                            Id = pi.Id,
+                            image = pi.image,
+                            desc = pi.ARdesc,
+                            title = pi.ARtitle,
+                        }).ToList()
+                    }
+
+                }).ToList();
+                return SolutionPages;
+            }
+            
         }
         public async void uploadImage(IFormFile image, Guid imageId)
         {
 
-            string uploadFolder = Path.Combine(webHostEnvironment.WebRootPath, "images", "ProductsImages");
+            string uploadFolder = Path.Combine(webHostEnvironment.WebRootPath, "Images");
             string imageName = imageId.ToString() + "_" + image.FileName;
             string filePath = Path.Combine(uploadFolder, imageName);
             using (var fileStream = new FileStream(filePath, FileMode.Create))

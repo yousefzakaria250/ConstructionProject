@@ -46,7 +46,7 @@ namespace Infrastructure.Repositories.HomeRepos
 
         }
 
-        public IEnumerable<SliderInfoDto> GetAll()
+        public IEnumerable<SliderInfoDto> GetAll(string Lang)
         {
             List<slider> counterDb = constructionContext.sliders.ToList();
             List<SliderInfoDto> counterInfoDtos = new List<SliderInfoDto>();
@@ -54,8 +54,16 @@ namespace Infrastructure.Repositories.HomeRepos
             {
                 SliderInfoDto counterInfoDto = new SliderInfoDto();
                 counterInfoDto.Id = item.Id;
-                counterInfoDto.desc = item.desc;
-                counterInfoDto.title = item.Title;
+                if (Lang == "en")
+                {
+                    counterInfoDto.desc = item.ENdesc;
+                    counterInfoDto.title = item.ENTitle;
+                }
+                else
+                {
+                    counterInfoDto.desc = item.ARdesc;
+                    counterInfoDto.title = item.ARTitle;
+                }
                 counterInfoDto.BgImage = item.BgImage;
 
                 counterInfoDtos.Add(counterInfoDto);
@@ -63,17 +71,26 @@ namespace Infrastructure.Repositories.HomeRepos
             return counterInfoDtos;
         }
 
-        public SliderInfoDto getById(int id)
+        public SliderInfoDto getById(int id,string Lang)
         {
             var res = this.constructionContext.sliders
               .FirstOrDefault(prop => prop.Id == id)!;
             if (res == null)
                 return null;
             SliderInfoDto counter = new SliderInfoDto();
-            counter.desc = res.desc;
+            if (Lang == "en")
+            {
+                counter.title = res.ENTitle;
+                counter.desc = res.ENdesc;
+            }
+            else
+            {
+                counter.title = res.ENTitle;
+                counter.desc = res.ENdesc;
+            }
             counter.Id = res.Id;
             counter.BgImage = res.BgImage;
-            counter.title = res.Title;
+            
             return counter;
         }
 
@@ -94,7 +111,7 @@ namespace Infrastructure.Repositories.HomeRepos
 
             FileStream fs = new FileStream(
                Path.Combine(Directory.GetCurrentDirectory(),
-                "Content", "images", "slider", NewName)
+                "Content", "Images", NewName)
                , FileMode.OpenOrCreate, FileAccess.ReadWrite);
             await image.CopyToAsync(fs);
         }

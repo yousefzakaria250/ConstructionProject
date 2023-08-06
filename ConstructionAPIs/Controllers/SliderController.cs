@@ -34,15 +34,15 @@ namespace ConstructionAPIs.Controllers
         }
 
         [HttpGet("GetAll")]
-        public IActionResult Get()
+        public IActionResult Get(string Lang)
         {
-            return Ok(sliderRepo.GetAll());
+            return Ok(sliderRepo.GetAll(Lang));
         }
         [HttpGet("GetSliderByID")]
-        public IActionResult GetById(int id)
+        public IActionResult GetById(int id,string Lang)
         {
             if (id != null)
-                return Ok(this.sliderRepo.getById(id));
+                return Ok(this.sliderRepo.getById(id, Lang));
             return BadRequest("Project Page ID is Missing");
         }
 

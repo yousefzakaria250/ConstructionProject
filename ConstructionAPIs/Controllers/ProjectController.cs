@@ -32,10 +32,10 @@ namespace ConstructionAPIs.Controllers
         }
 
         [HttpGet("GetAll")]
-        public IActionResult Get()
+        public IActionResult Get(string Lang)
         {
 
-            return Ok(projectRepo.GetAll());
+            return Ok(projectRepo.GetAll(Lang));
         }
        
 
@@ -49,11 +49,11 @@ namespace ConstructionAPIs.Controllers
             return BadRequest("لم يتم الحذف حاول مره اخري");
         }
         [HttpGet("GetProjectPageByID")]
-        public IActionResult GetById(int id)
+        public IActionResult GetById(int id,string Lang)
         {
             
-            if(this.projectRepo.getById(id)!=null)
-                 return Ok(this.projectRepo.getById(id));
+            if(this.projectRepo.getById(id, Lang) !=null)
+                 return Ok(this.projectRepo.getById(id, Lang));
             return BadRequest("Wrong Project ID");
         }
 
