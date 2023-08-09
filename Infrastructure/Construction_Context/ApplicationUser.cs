@@ -25,7 +25,7 @@ namespace Infrastructure.Construction_Context
 
         [Required, MinLength(3), MaxLength(20)]
         public string LastName { get; set; }
-        public byte[]? image { get; set; }
+        public string? image { get; set; }
 
     }
 }

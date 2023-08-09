@@ -31,12 +31,12 @@ namespace Infrastructure.Repositories.HomeRepos
            
             try
             {
-                Project? item = constructionContext.Project.FirstOrDefault(p => p.Id == id);
+                CounterUp? item = constructionContext.counterUps.FirstOrDefault(p => p.Id == id);
                 if (item == null)
                     return false;
                 else
                 {
-                    constructionContext.Project.Remove(item);
+                    constructionContext.counterUps.Remove(item);
                     constructionContext.SaveChanges();
                     return true;
                 }

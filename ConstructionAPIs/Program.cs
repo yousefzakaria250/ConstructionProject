@@ -27,6 +27,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.Extensions.Hosting.Internal;
 
 //var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
@@ -75,6 +76,9 @@ builder.Services.AddScoped<IContactPageRepository, ContactPageRepository>();
 
 //By Mahmoud Hefny
 
+//builder.Services.AddSingleton<IWebHostEnvironment>(env => HostingEnvironment);
+
+
 builder.Services.AddScoped<IPublicInterface<ProjectPageAddDto, ProjectPage, ProjectPageInfoDto>, ProjectPageRepo>();
 
 builder.Services.AddScoped<IPublicInterface<ProjectAddDto, Project, ProjectInfoDto>, ProjectRepo>();
@@ -91,11 +95,12 @@ builder.Services.AddScoped<IPublicInterface<homePageAddDto, HomePage, HomepageIn
 
 //Inject AutoMapper
 builder.Services.AddAutoMapper(typeof(DomainProfile));
+//builder.Services.AddSingleton<IWebHostEnvironment>(env => env.GetRequiredService<IHostingEnvironment>().WebHostEnvironment);
 //inject usermager
 builder.Services.AddScoped<IAppUserRepo, AppUserRepo>();
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ConstructionContext>();
-
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

@@ -14,6 +14,6 @@ namespace Infrastructure.Repositories.ApplicationUserReposatories
     {
         public Task<AuthenticationModel> RegisetrAsync(RegisterDto userDTO);
         public  Task<JwtSecurityToken> LoginWithGoogle(string credential);
-       // public Task<AuthenticationModel> Login(LoginDto userDto);
+        public Task<AuthenticationModel> Login(LoginDto userDto);
     }
 }

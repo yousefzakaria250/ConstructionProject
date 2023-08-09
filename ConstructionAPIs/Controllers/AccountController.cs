@@ -56,8 +56,20 @@ namespace ConstructionAPIs.Controllers
                     return BadRequest();
                 }
             }
-            else {  return BadRequest(ModelState); }
+            else { return BadRequest( StatusCode(400, ModelState)); }
           
+        }
+        [HttpPost("SignIn")]
+        public async Task<IActionResult> SignIn([FromBody] LoginDto user)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await AppRepo.Login(user);
+                if (!result.IsAuthenticated)
+                    return BadRequest(result.Message);
+                return Ok(result);
+            }
+            return BadRequest(StatusCode(400, ModelState));
         }
 
     }

@@ -28,10 +28,11 @@ namespace Infrastructure.Mapper
 {
     public class DomainProfile : Profile
     {
-       
 
-       
-        public DomainProfile() { 
+
+        //private readonly IWebHostEnvironment _webHostEnvironment;
+        public DomainProfile() {
+           
             CreateMap<ProjectPageAddDto, ProjectPage>()
                    .ForMember(dest => dest.bg, opt => opt.MapFrom(src =>
                   uploadImage(src.bgImage)));
@@ -71,7 +72,7 @@ namespace Infrastructure.Mapper
            .ForMember(dest => dest.logoImage, opt => opt.MapFrom(src =>
           uploadImage(src.Logo)));
         }
-        public  async Task<string> uploadImage(IFormFile image)//, Guid imageId)
+        public  string uploadImage(IFormFile image)//, Guid imageId)
         {
             //return ImageGuid.ToString() + "_" + image.FileName;
             string NewName = Guid.NewGuid().ToString() + image.FileName;
@@ -79,52 +80,26 @@ namespace Infrastructure.Mapper
                Path.Combine(Directory.GetCurrentDirectory(),
                 "Content", "Images", NewName)
                , FileMode.OpenOrCreate, FileAccess.ReadWrite);
-                  image.CopyTo(fs);
-               // fs.Close();
-                fs.Position = 0;
+             image.CopyTo(fs);
+            // fs.Close();
+            fs.Position = 0;
             return NewName;
+            //string imageName = Guid.NewGuid().ToString() + "_" + image.FileName;
+            //string imagePath = Path.Combine(_webHostEnvironment.ContentRootPath, "Content", "Images", imageName);
 
+            //using (FileStream fs = new FileStream(imagePath, FileMode.Create))
+            //{
+            //    await image.CopyToAsync(fs);
+            //}
+
+            //return imageName;
         }
-
-        //static string MapBg(IFormFile bg)
-        //{
-        //   /// return "";
-        //    string uploadFolder = Path.Combine(webHostEnvironment.WebRootPath, "images", "ProductsImages");
-        //    string imageName = imageId.ToString() + "_" + image.FileName;
-        //    string filePath = Path.Combine(uploadFolder, imageName);
-        //    using (var fileStream = new FileStream(filePath, FileMode.Create))
-        //    {
-        //        await image.CopyToAsync(fileStream);
-        //        fileStream.Close();
-        //    }
-        //}
+        
+  
     }
 }
 
-    //    CreateMap<ApplicationUser, RegisterDto>()
-    //     .ForMember(dest => dest.image, opt => opt.Ignore());
-    //    CreateMap<RegisterDto, ApplicationUser>()
-    //        .ForMember(dest => dest.image, opt => opt.MapFrom(src => {
-    //            if (src.image != null)
-    //            {
-    //                using var memoryStream = new MemoryStream();
-    //                src.image.CopyTo(memoryStream);
-    //                return memoryStream.ToArray();
-    //            }
-    //            return null;
-    //        }));
-
-
-            //CreateMap<RegisterDto, ApplicationUser>()
-            //.ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email))
-            //.ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))       
-            //.ForMember(dest => dest.PhoneNumber, opt => opt.MapFrom(src => src.PhoneNumber))
-            //.ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.FirstName))
-            //.ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.Password))
-            //.ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName));
-
-           
-        //}
+ 
     
     
 

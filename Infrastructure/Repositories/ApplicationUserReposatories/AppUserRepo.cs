@@ -20,6 +20,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using WebApplication1.Constatnts;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Infrastructure.Repositories.ApplicationUserReposatories
 {
@@ -62,10 +63,16 @@ namespace Infrastructure.Repositories.ApplicationUserReposatories
             user.LastName = userDTO.LastName;
             user.FirstName = userDTO.FirstName;
             user.Password = userDTO.Password;
-            using var dataStream = new MemoryStream();
-            await userDTO.image.CopyToAsync(dataStream);
-            var temp= dataStream.ToArray();
-            user.image = temp;
+            string NewName = Guid.NewGuid().ToString() + userDTO.image.FileName;
+
+            FileStream fs = new FileStream(
+               Path.Combine(Directory.GetCurrentDirectory(),
+                "Content", "Images", NewName)
+               , FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            userDTO.image.CopyTo(fs);
+            // fs.Close();
+            fs.Position = 0;
+            user.image = NewName;
             //   var data = mapper.Map<ApplicationUser>(userDTO);
                             //create user in database
             IdentityResult result = await userManger.CreateAsync(user, userDTO.Password);
@@ -112,7 +119,6 @@ namespace Infrastructure.Repositories.ApplicationUserReposatories
 
             //var user = UserList.Where(x => x.UserName == payload.Name).FirstOrDefault();
             //var user = context.users.Where(x => x.UserName == payload.Name).FirstOrDefault();
-
             //if (user != null)
             //{
             //    return await CreateJwtToken(user);
@@ -175,6 +181,43 @@ namespace Infrastructure.Repositories.ApplicationUserReposatories
 
         //    return new { token = encrypterToken, username = user.UserName };
         //}
+
+
+
+
+        public async Task<AuthenticationModel> Login(LoginDto userDto)
+        {
+            var AuthModel = new AuthenticationModel();
+            ApplicationUser user = await userManger.FindByNameAsync(userDto.UserName);
+            if (user == null)
+            {
+                AuthModel.Message = "اسم المستخدم غير صحيح";
+                return AuthModel;
+            }
+            else
+            {
+                bool found = await userManger.CheckPasswordAsync(user, userDto.Password);
+                if (found)
+                {
+                    var myToken = await CreateJwtToken(user);
+
+                    var roleList = await userManger.GetRolesAsync(user);
+                    AuthModel.IsAuthenticated = true;
+                    AuthModel.Token = new JwtSecurityTokenHandler().WriteToken(myToken);
+                    AuthModel.Email = user.Email;
+                    AuthModel.Username = user.UserName;
+                    AuthModel.Roles = roleList.ToList();
+                    AuthModel.ExpiresOn = myToken.ValidTo;
+                    return AuthModel;
+                }
+                else
+                {
+                    AuthModel.Message = "كلمة المرور غير صحيحه";
+                    return AuthModel;
+                }
+            }
+        }
+
 
 
         private async Task<JwtSecurityToken> CreateJwtToken(ApplicationUser user)
