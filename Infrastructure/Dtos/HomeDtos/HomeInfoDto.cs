@@ -15,13 +15,13 @@ namespace Infrastructure.Dtos.HomeDtos
 {
     public class HomepageInfoDto
     {
-        public int Id { get; set; }
-        public string logoImage { get; set; }
-        public ICollection<SliderInfoDto> sliders { get; set; }
-        public AboutPageDto about { get; set; }
-        public counterUpInfoDto counterUp { get; set; }
-        public Service services { get; set; }
-        public ProjectInfoDto project { get; set; }
+       // public int Id { get; set; }
+        public string? logo { get; set; }
+        public ICollection<SliderInfoDto>? slider { get; set; }
+        public HomeAboutInfoDto? about { get; set; }
+        public counterUpInfoDto? counterUp { get; set; }
+        public ServiceInfoDto? services { get; set; }
+        public ProjectInfoDto? project { get; set; }
 
     }
 }

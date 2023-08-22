@@ -38,7 +38,7 @@ namespace Infrastructure.Repositories.HomeRepos
                     return true;
                 }
             }
-            catch (Exception e)
+            catch
             {
                 return false;
             }
@@ -116,14 +116,12 @@ namespace Infrastructure.Repositories.HomeRepos
         }
         public Counter Update(int id, CounterAddDto entity)
         {
-            Counter counter = constructionContext.counters.FirstOrDefault(p => p.Id == id);//getById(id);
+            Counter counter = constructionContext.counters.FirstOrDefault(p => p.Id == id)!;
             if (counter != null)
             {
                 var data = mapper.Map(entity, counter, opt => opt.AfterMap((src,
                      dest) =>
                 {
-                    //if (entity.icon !=null)
-                    //{
                     using var memoryStream = new MemoryStream();
                     src.icon.CopyTo(memoryStream);
                     var ImageGuid = new Guid();

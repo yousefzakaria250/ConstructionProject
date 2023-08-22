@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Dtos
 {
-    public class ServiceItemDto
+    public class 
+        
+        ServiceItemDto
     {
+        public int Id { get; set; }
         public string title { set; get; }
-        public string titleAR { set; get; }
         public string desc { set; get; }
-        public string descAR { set; get; }
         public IFormFile icon { set; get; } // Image
         public int ServiceId { set; get; }
     }

@@ -78,14 +78,14 @@ namespace Infrastructure.Repositories.ProjectRepo.ProjectRepos
                     var projectdto = new ProjectInfoDto
                     {
                         title = projectPage.project.ENtitle,
-                        projectItems = projectitemsdto.ToList()
+                        projects = projectitemsdto.ToList()
                     };
 
                     var projectpagedto = new ProjectPageInfoDto
                     {
                         header = projectPage.ENheader,
                         bg = projectPage.bg,
-                        projectInfoDto = projectdto
+                        project = projectdto
                     };
                     return projectpagedto;
                 }
@@ -95,7 +95,7 @@ namespace Infrastructure.Repositories.ProjectRepo.ProjectRepos
                 {
                     header = projectPage.ENheader,
                     bg = projectPage.bg,
-                    projectInfoDto = null
+                    project = null
                 };
                 return projectpagedto2;
             }
@@ -118,14 +118,14 @@ namespace Infrastructure.Repositories.ProjectRepo.ProjectRepos
                     var projectdto = new ProjectInfoDto
                     {
                         title = projectPage.project.ARtitle,
-                        projectItems = projectitemsdto.ToList()
+                        projects = projectitemsdto.ToList()
                     };
 
                     var projectpagedto = new ProjectPageInfoDto
                     {
                         header = projectPage.ARheader,
                         bg = projectPage.bg,
-                        projectInfoDto = projectdto
+                        project = projectdto
                     };
                     return projectpagedto;
                 }
@@ -135,7 +135,7 @@ namespace Infrastructure.Repositories.ProjectRepo.ProjectRepos
                 {
                     header = projectPage.ARheader,
                     bg = projectPage.bg,
-                    projectInfoDto = null
+                    project = null
                 };
                 return projectpagedto2;
             }
@@ -150,15 +150,15 @@ namespace Infrastructure.Repositories.ProjectRepo.ProjectRepos
              .ThenInclude(p => p.projects)
                     .Select(p => new
 
-                        ProjectPageInfoDto
+                        ProjectPageInfoDto 
                     {
                         header = p.ENheader,
                         bg = p.bg,
                         Id = p.Id,
-                        projectInfoDto = new ProjectInfoDto
+                        project = new ProjectInfoDto
                         {
                             title = p.project.ENtitle,
-                            projectItems = p.project.projects.Select(pi => new ProjectItemsInfoDto
+                            projects = p.project.projects.Select(pi => new ProjectItemsInfoDto
                             {
                                 Id = pi.Id,
                                 image = pi.image,
@@ -183,10 +183,10 @@ namespace Infrastructure.Repositories.ProjectRepo.ProjectRepos
                        header = p.ARheader,
                        bg = p.bg,
                        Id = p.Id,
-                       projectInfoDto = new ProjectInfoDto
+                       project = new ProjectInfoDto
                        {
                            title = p.project.ARtitle,
-                           projectItems = p.project.projects.Select(pi => new ProjectItemsInfoDto
+                           projects = p.project.projects.Select(pi => new ProjectItemsInfoDto
                            {
                                Id = pi.Id,
                                image = pi.image,
@@ -233,7 +233,7 @@ namespace Infrastructure.Repositories.ProjectRepo.ProjectRepos
         }
         public ProjectPage Update(int id, ProjectPageAddDto entity)
         {
-            ProjectPage projectPage = constructionContext.ProjectPage.FirstOrDefault(p => p.Id == id);//getById(id);
+            ProjectPage? projectPage = constructionContext.ProjectPage.FirstOrDefault(p => p.Id == id);//getById(id);
             if (projectPage != null)
             {
                 var data = maperr.Map(entity, projectPage, opt => opt.AfterMap((src,
@@ -258,7 +258,9 @@ namespace Infrastructure.Repositories.ProjectRepo.ProjectRepos
         {
             try
             {
-                ProjectPage? item = constructionContext.ProjectPage.FirstOrDefault(p => p.Id == id);
+                ProjectPage? item = constructionContext.ProjectPage.Include(p => p.project).ThenInclude(PI => PI.projects)
+                    .FirstOrDefault(p => p.Id == id);
+
                 if (item == null)
                     return false;
                 else
@@ -268,7 +270,7 @@ namespace Infrastructure.Repositories.ProjectRepo.ProjectRepos
                     return true;
                 }
             }
-            catch (Exception e)
+            catch
             {
                 return false;
             }

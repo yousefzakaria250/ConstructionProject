@@ -8,11 +8,11 @@ namespace Data.Models.HomePAge
 {
     public class slider:EntityBase
     {
-        public string BgImage { get; set; }
-        public string ENTitle { get; set; }
-        public string ARTitle { get; set; }
-        public string ARdesc { get; set; }
-        public string ENdesc { get; set; }
+        public string BgImage { get; set; } = String.Empty;
+        public string ENTitle { get; set; } = String.Empty;
+        public string ARTitle { get; set; } = String.Empty;
+        public string ARdesc { get; set; } = String.Empty;
+        public string ENdesc { get; set; } = String.Empty;
 
     }
 }

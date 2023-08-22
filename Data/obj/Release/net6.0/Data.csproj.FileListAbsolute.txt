@@ -10,3 +10,17 @@ G:\Construction Project FreeLance\ConstructionAPIs\Data\obj\Release\net6.0\Data.
 G:\Construction Project FreeLance\ConstructionAPIs\Data\obj\Release\net6.0\refint\Data.dll
 G:\Construction Project FreeLance\ConstructionAPIs\Data\obj\Release\net6.0\Data.pdb
 G:\Construction Project FreeLance\ConstructionAPIs\Data\obj\Release\net6.0\ref\Data.dll
+E:\lastVesionOfConstruction\Data\bin\Release\net6.0\Data.deps.json
+E:\lastVesionOfConstruction\Data\bin\Release\net6.0\Data.runtimeconfig.json
+E:\lastVesionOfConstruction\Data\bin\Release\net6.0\Data.dll
+E:\lastVesionOfConstruction\Data\bin\Release\net6.0\Data.pdb
+E:\lastVesionOfConstruction\Data\obj\Release\net6.0\Data.csproj.AssemblyReference.cache
+E:\lastVesionOfConstruction\Data\obj\Release\net6.0\Data.GeneratedMSBuildEditorConfig.editorconfig
+E:\lastVesionOfConstruction\Data\obj\Release\net6.0\Data.AssemblyInfoInputs.cache
+E:\lastVesionOfConstruction\Data\obj\Release\net6.0\Data.AssemblyInfo.cs
+E:\lastVesionOfConstruction\Data\obj\Release\net6.0\Data.csproj.CoreCompileInputs.cache
+E:\lastVesionOfConstruction\Data\obj\Release\net6.0\Data.dll
+E:\lastVesionOfConstruction\Data\obj\Release\net6.0\refint\Data.dll
+E:\lastVesionOfConstruction\Data\obj\Release\net6.0\Data.pdb
+E:\lastVesionOfConstruction\Data\obj\Release\net6.0\Data.genruntimeconfig.cache
+E:\lastVesionOfConstruction\Data\obj\Release\net6.0\ref\Data.dll

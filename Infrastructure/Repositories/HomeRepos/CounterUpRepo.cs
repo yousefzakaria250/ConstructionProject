@@ -58,7 +58,7 @@ namespace Infrastructure.Repositories.HomeRepos
                       counterUpInfoDto
                   {
                       Id = p.Id,
-                      BgImage = p.BgImage,
+                      Bg = p.BgImage,
 
                       Counter = p.Counter.Select(pi => new CounterInfoDto
                       {
@@ -80,7 +80,7 @@ namespace Infrastructure.Repositories.HomeRepos
                    counterUpInfoDto
                {
                    Id = p.Id,
-                   BgImage = p.BgImage,
+                   Bg = p.BgImage,
 
                    Counter = p.Counter.Select(pi => new CounterInfoDto
                    {
@@ -116,14 +116,14 @@ namespace Infrastructure.Repositories.HomeRepos
                         }).ToList();
                         var counterUpInfoDto = new counterUpInfoDto
                         {
-                            BgImage = counterUp.BgImage
+                            Bg = counterUp.BgImage
 
                         };
                         return counterUpInfoDto;
                     }
                     var counterUpInfoDto1 = new counterUpInfoDto
                     {
-                        BgImage = counterUp.BgImage
+                        Bg = counterUp.BgImage
 
                     };
 
@@ -149,14 +149,14 @@ namespace Infrastructure.Repositories.HomeRepos
                         }).ToList();
                         var counterUpInfoDto = new counterUpInfoDto
                         {
-                            BgImage = counterUp.BgImage
+                            Bg = counterUp.BgImage
 
                         };
                         return counterUpInfoDto;
                     }
                     var counterUpInfoDto1 = new counterUpInfoDto
                     {
-                        BgImage = counterUp.BgImage
+                        Bg = counterUp.BgImage
 
                     };
 
@@ -177,19 +177,19 @@ namespace Infrastructure.Repositories.HomeRepos
                 constructionContext.SaveChanges();
                 return data;
             }
-            return null;
+            return null!;
         }
 
         public CounterUp Update(int id, counterUpAddDto entity)
         {
-            CounterUp OldcounterUp = constructionContext.counterUps.FirstOrDefault(p => p.Id == id);//getById(id);
+            CounterUp OldcounterUp = constructionContext.counterUps.FirstOrDefault(p => p.Id == id)!;//getById(id);
             var data = mapper.Map(entity, OldcounterUp);
             if (data != null)
             {
                 constructionContext.SaveChanges();
                 return data;
             }
-            return null;
+            return null!;
         }
     }
 }

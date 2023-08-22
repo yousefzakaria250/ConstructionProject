@@ -36,7 +36,7 @@ namespace Infrastructure.Repositories.SolutionRepos
                 {
                     title = p.ENtitle,
 
-                    solutionItems = p.solutions.Select(pi => new SolutionItemsInfoDto
+                    solutions = p.solutions.Select(pi => new SolutionItemsInfoDto
                     {
                         Id = pi.Id,
                         image = pi.image,
@@ -57,7 +57,7 @@ namespace Infrastructure.Repositories.SolutionRepos
                 {
                     title = p.ARtitle,
 
-                    solutionItems = p.solutions.Select(pi => new SolutionItemsInfoDto
+                    solutions = p.solutions.Select(pi => new SolutionItemsInfoDto
                     {
                         Id = pi.Id,
                         image = pi.image,
@@ -159,7 +159,7 @@ namespace Infrastructure.Repositories.SolutionRepos
                     return true;
                 }
             }
-            catch (Exception e)
+            catch
             {
                 return false;
             }

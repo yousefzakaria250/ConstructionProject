@@ -10,12 +10,12 @@ namespace Data.Models.About
 {
     public class AboutPage :EntityBase
     {
-        public string header { set; get; }
-        public string bg { set; get; } /// Image
-        public string headerAR { set; get;}
+        public string header { set; get; } = String.Empty;
+        public string bg { set; get; } = String.Empty; /// Image
+        public string headerAR { set; get;} = String.Empty;
         //[ForeignKey("Section")]
         //public int SectionId { set; get; }
-        public Section Section { set; get; }
+        public Section? Section { set; get; } = null!;
 
     }
 }

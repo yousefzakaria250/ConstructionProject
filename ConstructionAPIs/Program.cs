@@ -98,6 +98,7 @@ builder.Services.AddAutoMapper(typeof(DomainProfile));
 //builder.Services.AddSingleton<IWebHostEnvironment>(env => env.GetRequiredService<IHostingEnvironment>().WebHostEnvironment);
 //inject usermager
 builder.Services.AddScoped<IAppUserRepo, AppUserRepo>();
+
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ConstructionContext>();
 builder.Services.AddHttpContextAccessor();
@@ -142,22 +143,11 @@ app.UseStaticFiles(new StaticFileOptions()
             "Content"))
 });
 
-//app.UseStaticFiles(new StaticFileOptions()
-//{
-//    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Content")),
-//    RequestPath = new PathString("/Content")
-//});
-
-
-
-
 app.UseHttpsRedirection();
 app.UseCors("Cors");
-app.UseRouting();
-//app.UseCors(devCorsPolicy);
-app.UseAuthorization();
-
+//app.UseRouting();
 app.MapControllers();
 
-
+app.UseAuthentication();
+app.UseAuthorization();
 app.Run();

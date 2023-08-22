@@ -30,7 +30,7 @@ namespace Infrastructure.Repositories
                     .Include(c => c.ContactInfo)
                     .ThenInclude(t => t.ContactIcons)
                     .ThenInclude(t => t.Icons)
-                    .OrderByDescending(i => i.Id)
+                    //  .OrderByDescending(i => i.Id)
                     .Select(r => new
                     {
                         header = r.header,
@@ -58,7 +58,7 @@ namespace Infrastructure.Repositories
                                 })
                             }
                         }
-                    }).FirstOrDefaultAsync();
+                    }).ToListAsync();//FirstOrDefaultAsync();
                 return result;
             }
             else
@@ -67,7 +67,7 @@ namespace Infrastructure.Repositories
                       .Include(c => c.ContactInfo)
                     .ThenInclude(t => t.ContactIcons)
                     .ThenInclude(t => t.Icons)
-                    .OrderByDescending(i => i.Id)
+                    // .OrderByDescending(i => i.Id)
                     .Select(r => new
                     {
                         header = r.headerAR,
@@ -95,7 +95,7 @@ namespace Infrastructure.Repositories
                                 })
                             }
                         }
-                    }).FirstOrDefaultAsync();
+                    }).ToListAsync();//FirstOrDefaultAsync();
                 return result;
             }
         }

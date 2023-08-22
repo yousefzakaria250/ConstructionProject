@@ -55,28 +55,34 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("AboutPageId")
+                    b.Property<int?>("AboutPageId")
                         .HasColumnType("int");
 
                     b.Property<string>("DescAR")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TitleAR")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("desc")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("image")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("title")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AboutPageId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[AboutPageId] IS NOT NULL");
 
                     b.ToTable("Section");
                 });
@@ -394,30 +400,10 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("aboutId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("counterUpId")
-                        .HasColumnType("int");
-
                     b.Property<string>("logoImage")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("projectId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("servicesId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("aboutId");
-
-                    b.HasIndex("counterUpId");
-
-                    b.HasIndex("projectId");
-
-                    b.HasIndex("servicesId");
 
                     b.ToTable("homePages");
                 });
@@ -450,12 +436,7 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("HomePageId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("HomePageId");
 
                     b.ToTable("sliders");
                 });
@@ -961,8 +942,7 @@ namespace Infrastructure.Migrations
                     b.HasOne("Data.Models.About.AboutPage", "Aboutpage")
                         .WithOne("Section")
                         .HasForeignKey("Data.Models.About.Section", "AboutPageId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Aboutpage");
                 });
@@ -1031,40 +1011,6 @@ namespace Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("counterup");
-                });
-
-            modelBuilder.Entity("Data.Models.HomePAge.HomePage", b =>
-                {
-                    b.HasOne("Data.Models.About.AboutPage", "about")
-                        .WithMany()
-                        .HasForeignKey("aboutId");
-
-                    b.HasOne("Data.Models.HomePAge.CounterUp", "counterUp")
-                        .WithMany()
-                        .HasForeignKey("counterUpId");
-
-                    b.HasOne("Data.Models.Project.ProjectPage", "project")
-                        .WithMany()
-                        .HasForeignKey("projectId");
-
-                    b.HasOne("Data.Models.Service.ServicePage", "services")
-                        .WithMany()
-                        .HasForeignKey("servicesId");
-
-                    b.Navigation("about");
-
-                    b.Navigation("counterUp");
-
-                    b.Navigation("project");
-
-                    b.Navigation("services");
-                });
-
-            modelBuilder.Entity("Data.Models.HomePAge.slider", b =>
-                {
-                    b.HasOne("Data.Models.HomePAge.HomePage", null)
-                        .WithMany("sliders")
-                        .HasForeignKey("HomePageId");
                 });
 
             modelBuilder.Entity("Data.Models.Project.Project", b =>
@@ -1186,8 +1132,7 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Data.Models.About.AboutPage", b =>
                 {
-                    b.Navigation("Section")
-                        .IsRequired();
+                    b.Navigation("Section");
                 });
 
             modelBuilder.Entity("Data.Models.Contact.Contact", b =>
@@ -1221,11 +1166,6 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Data.Models.HomePAge.CounterUp", b =>
                 {
                     b.Navigation("Counter");
-                });
-
-            modelBuilder.Entity("Data.Models.HomePAge.HomePage", b =>
-                {
-                    b.Navigation("sliders");
                 });
 
             modelBuilder.Entity("Data.Models.Project.Project", b =>

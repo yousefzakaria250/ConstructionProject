@@ -11,14 +11,12 @@ namespace Data.Models.Service
     [Table("Services")]
     public class Service :EntityBase
     {
-        public string title { set; get; }
-        public string titleAR { set; get; }
+        public string title { set; get; } = String.Empty;
+        public string titleAR { set; get; } = String.Empty;
         [ForeignKey("ServicePage")]
         public int ServicePageId { set; get;  }
         [JsonIgnore]
-        public ServicePage ServicePage { get; set; } 
-
-        public ICollection<ServiceItem> serviceItems { set; get; } 
-
+        public ServicePage ServicePage { get; set; } = null!;
+        public ICollection<ServiceItem> serviceItems { set; get; } = null!;
     }
 }

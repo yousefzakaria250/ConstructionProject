@@ -29,14 +29,14 @@ namespace Infrastructure.Repositories.ApplicationUserReposatories
         private readonly UserManager<ApplicationUser> userManger;
         private readonly IConfiguration config;
         private readonly RoleManager<IdentityRole> roleManager;
-     //   private readonly JWT jwt;
+        //   private readonly JWT jwt;
         private readonly ConstructionContext context;
         private readonly IMapper mapper;
 
         private readonly AppSettings _applicationSettings;
         private readonly HttpClient _httpClient;
-        public AppUserRepo(UserManager<ApplicationUser>_userManager,ConstructionContext _context,
-                           RoleManager<IdentityRole>_roleManager,IConfiguration _config,
+        public AppUserRepo(UserManager<ApplicationUser> _userManager, ConstructionContext _context,
+                           RoleManager<IdentityRole> _roleManager, IConfiguration _config,
                            IMapper _mapper
                           )
         {
@@ -63,7 +63,7 @@ namespace Infrastructure.Repositories.ApplicationUserReposatories
             user.LastName = userDTO.LastName;
             user.FirstName = userDTO.FirstName;
             user.Password = userDTO.Password;
-            string NewName = Guid.NewGuid().ToString() + userDTO.image.FileName;
+            string NewName = Guid.NewGuid().ToString() + userDTO!.image!.FileName;
 
             FileStream fs = new FileStream(
                Path.Combine(Directory.GetCurrentDirectory(),

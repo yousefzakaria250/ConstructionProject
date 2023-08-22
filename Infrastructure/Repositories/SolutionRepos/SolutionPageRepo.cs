@@ -49,14 +49,14 @@ namespace Infrastructure.Repositories.SolutionRepos
                 var solutionDto = new SolutionInfoDto
                 {
                     title = SolutionPage.solution.ENtitle,
-                    solutionItems = solutionItemsDto
+                    solutions = solutionItemsDto
                 };
 
                 var SolutionPageDto = new SolutionPageInfoDto
                 {
                     header = SolutionPage.ENheader,
                     bg = SolutionPage.bgImage,
-                    solutionInfoDto = solutionDto
+                    solution = solutionDto
                 };
 
                 return SolutionPageDto;
@@ -78,14 +78,14 @@ namespace Infrastructure.Repositories.SolutionRepos
                 var solutionDto = new SolutionInfoDto
                 {
                     title = SolutionPage.solution.ARtitle,
-                    solutionItems = solutionItemsDto
+                    solutions = solutionItemsDto
                 };
 
                 var SolutionPageDto = new SolutionPageInfoDto
                 {
                     header = SolutionPage.ARheader,
                     bg = SolutionPage.bgImage,
-                    solutionInfoDto = solutionDto
+                    solution = solutionDto
                 };
 
                 return SolutionPageDto;
@@ -105,10 +105,10 @@ namespace Infrastructure.Repositories.SolutionRepos
                 {
                     header = p.ENheader,
                     bg = p.bgImage,
-                    solutionInfoDto = new SolutionInfoDto
+                    solution = new SolutionInfoDto
                     {
                         title = p.solution.ENtitle,
-                        solutionItems = p.solution.solutions.Select(pi => new SolutionItemsInfoDto
+                        solutions = p.solution.solutions.Select(pi => new SolutionItemsInfoDto
                         {
                             Id = pi.Id,
                             image = pi.image,
@@ -131,10 +131,10 @@ namespace Infrastructure.Repositories.SolutionRepos
                 {
                     header = p.ENheader,
                     bg = p.bgImage,
-                    solutionInfoDto = new SolutionInfoDto
+                    solution = new SolutionInfoDto
                     {
                         title = p.solution.ARtitle,
-                        solutionItems = p.solution.solutions.Select(pi => new SolutionItemsInfoDto
+                        solutions = p.solution.solutions.Select(pi => new SolutionItemsInfoDto
                         {
                             Id = pi.Id,
                             image = pi.image,

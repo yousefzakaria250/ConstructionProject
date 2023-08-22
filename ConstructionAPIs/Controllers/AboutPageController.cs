@@ -10,7 +10,7 @@ namespace ConstructionAPIs.Controllers
     public class AboutPageController : ControllerBase
     {
         private readonly IAboutPageRepository aboutPageRepository;
-        private new List<string> _allowedExtenstions = new List<string> { ".jpg", ".png" };
+        private new List<string> _allowedExtenstions = new List<string> { ".jpg", ".png",".jpeg" };
         public AboutPageController(IAboutPageRepository aboutPageRepository)
         {
             this.aboutPageRepository = aboutPageRepository;
@@ -18,11 +18,9 @@ namespace ConstructionAPIs.Controllers
 
         [HttpGet("GetAll")]
         public async Task<IActionResult> Details(string Lang = "en")
-        {
-            
+        {   
             var result = await aboutPageRepository.GetAll(Lang);
             return Ok(result);
-
         }
         [HttpPost("CreateAbout")]
 
@@ -50,5 +48,28 @@ namespace ConstructionAPIs.Controllers
             var result = aboutPageRepository.InsertSection(dto);
             return Ok(result);
         }
+
+        [HttpPut("UpdateAboutPage")]
+        public async Task<IActionResult> UpdatePage(int id , [FromForm]AboutDto aboutDto)
+        {
+           
+            var result = await aboutPageRepository.Update(id , aboutDto);
+            return Ok(result);
+        }
+
+        [HttpPut("UpdateSection")]
+        public async Task<IActionResult> UpdateSection(int id, [FromForm] SectionDto dto)
+        {
+            var result = await aboutPageRepository.UpdateSection(id, dto);
+            return Ok(result);
+        }
+
+        [HttpDelete("Delete")]
+        public async Task<IActionResult> UpdateSection(int id)
+        {
+            var result = await aboutPageRepository.Delete(id);
+            return Ok(result);
+        }
+
     }
 }

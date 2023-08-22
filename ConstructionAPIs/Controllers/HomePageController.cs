@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ConstructionAPIs.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/HomePage")]
     [ApiController]
     public class HomePageController : ControllerBase
     {
@@ -35,20 +35,20 @@ namespace ConstructionAPIs.Controllers
             return BadRequest(ModelState);
         }
 
-        [HttpGet("GetAll")]
-        public IActionResult Get(string Lang)
+        [HttpGet("GetHomePageLogo")]
+        public IActionResult Get(string Lang="en")
         {
             return Ok(homePageRepo.GetAll(Lang));
         }
-        [HttpGet("GetProjectPageByID")]
-        public IActionResult GetById(int id,string Lang)
-        {
-            if (id >=0)
-                return Ok(this.homePageRepo.getById(id, Lang));
-            return BadRequest("Project Page ID is Missing");
-        }
+        //[HttpGet("GetProjectPageByID")]
+        //public IActionResult GetById(int id,string Lang)
+        //{
+        //    if (id >=0)
+        //        return Ok(this.homePageRepo.getById(id, Lang));
+        //    return BadRequest("Project Page ID is Missing");
+        //}
 
-        [HttpDelete("DeleteProjectPage")]
+        [HttpDelete("DeleteHomePage")]
         public IActionResult Delete(int id)
         {
             if (homePageRepo.Delete(id))

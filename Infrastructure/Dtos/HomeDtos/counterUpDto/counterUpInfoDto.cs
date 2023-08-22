@@ -10,8 +10,8 @@ namespace Infrastructure.Dtos.HomeDtos.counterUpDto
     public class counterUpInfoDto
     {
         public int Id { get; set; }
-        public string BgImage { get; set; }
-        public ICollection<CounterInfoDto> Counter { get; set; }
+        public string? Bg { get; set; }
+        public ICollection<CounterInfoDto>? Counter { get; set; }
 
     }
 }

@@ -9,7 +9,7 @@ namespace Infrastructure.Dtos.HomeDtos.SliderDto
     public class SliderInfoDto
     {
         public int Id { get; set; }
-        public string BgImage { get; set; }
+        public string bg { get; set; }
         public string desc { get; set; }
         public string title { get; set; }
         

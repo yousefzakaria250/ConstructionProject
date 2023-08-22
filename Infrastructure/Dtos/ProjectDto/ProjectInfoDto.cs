@@ -11,9 +11,9 @@ namespace Infrastructure.Dtos.ProjectDto
     {
        // public int Id { get; set; }
         //public string header { get; set; }
-        public string title { get; set; }
+        public string ?title { get; set; }
        // public int ProjectPageID { get; set; }
-        public List<ProjectItemsInfoDto> projectItems { get; set; }
+        public List<ProjectItemsInfoDto>? projects { get; set; }
 
     }
 }

@@ -36,7 +36,7 @@ namespace Infrastructure.Repositories.ProjectRepo.ProjectRepos
                         ProjectInfoDto
                     {
                         title = p.ENtitle,
-                        projectItems = p.projects.Select(pi => new ProjectItemsInfoDto
+                        projects = p.projects.Select(pi => new ProjectItemsInfoDto
                         {
                             Id = pi.Id,
                             image = pi.image,
@@ -56,7 +56,7 @@ namespace Infrastructure.Repositories.ProjectRepo.ProjectRepos
                       ProjectInfoDto
                   {
                       title = p.ARtitle,
-                      projectItems = p.projects.Select(pi => new ProjectItemsInfoDto
+                      projects = p.projects.Select(pi => new ProjectItemsInfoDto
                       {
                           Id = pi.Id,
                           image = pi.image,

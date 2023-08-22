@@ -29,9 +29,9 @@ namespace Infrastructure.Repositories
                 var result = await constructionContext.ServicePage
                     .Include(s => s.Service)
                     .ThenInclude(t => t.serviceItems)
-                    .OrderByDescending(r => r.Id)
-                    .Select( s => new
-                        {
+                    //.OrderByDescending(r => r.Id)
+                    .Select(s => new
+                    {
                         header = s.header,
                         bg = s.bg,
                         service = new
@@ -44,7 +44,7 @@ namespace Infrastructure.Repositories
                                 icon = z.icon
                             })
                         }
-                    }).FirstOrDefaultAsync();
+                    }).ToListAsync();//FirstOrDefaultAsync();
                 return result;
             }
             else
@@ -52,7 +52,7 @@ namespace Infrastructure.Repositories
                 var result = await constructionContext.ServicePage
                    .Include(s => s.Service)
                    .ThenInclude(t => t.serviceItems)
-                   .OrderByDescending(r => r.Id)
+                //   .OrderByDescending(r => r.Id)
                    .Select(s => new
                    {
                        header = s.headerAR,
@@ -68,7 +68,7 @@ namespace Infrastructure.Repositories
                            })
                        }
 
-                   }).FirstOrDefaultAsync();
+                   }).ToListAsync();//FirstOrDefaultAsync();
                 return result;
             }
         }
@@ -114,9 +114,9 @@ namespace Infrastructure.Repositories
             var serviceItem = new ServiceItem
             {
                 desc = dto.desc,
-                descAR = dto.descAR,
+               
                 title = dto.title,
-                titleAR = dto.titleAR,
+                
                 icon = NewName,
                 ServiceId = dto.ServiceId
             };

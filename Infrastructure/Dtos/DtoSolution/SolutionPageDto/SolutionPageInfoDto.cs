@@ -13,6 +13,6 @@ namespace Infrastructure.Dtos.DtoSolution.SolutionPageDto
         public int Id { get; set; }
         public string header { get; set; }
         public string bg { get; set; }
-        public SolutionInfoDto solutionInfoDto { get; set; }
+        public SolutionInfoDto? solution { get; set; }
     }
 }

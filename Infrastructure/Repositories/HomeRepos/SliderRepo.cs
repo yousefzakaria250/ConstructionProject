@@ -64,7 +64,7 @@ namespace Infrastructure.Repositories.HomeRepos
                     counterInfoDto.desc = item.ARdesc;
                     counterInfoDto.title = item.ARTitle;
                 }
-                counterInfoDto.BgImage = item.BgImage;
+                counterInfoDto.bg = item.BgImage;
 
                 counterInfoDtos.Add(counterInfoDto);
             }
@@ -89,7 +89,7 @@ namespace Infrastructure.Repositories.HomeRepos
                 counter.desc = res.ENdesc;
             }
             counter.Id = res.Id;
-            counter.BgImage = res.BgImage;
+            counter.bg = res.BgImage;
             
             return counter;
         }

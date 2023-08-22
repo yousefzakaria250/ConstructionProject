@@ -12,6 +12,6 @@ namespace Infrastructure.Dtos.DtoSolution.SolutionDto
     {
         public string title { get; set; }
         // public int ProjectPageID { get; set; }
-        public List<SolutionItemsInfoDto> solutionItems { get; set; }
+        public List<SolutionItemsInfoDto> ?solutions { get; set; }
     }
 }

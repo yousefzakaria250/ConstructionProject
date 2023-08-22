@@ -15,3 +15,20 @@ G:\Construction Project FreeLance\ConstructionAPIs\Infrastructure\obj\Release\ne
 G:\Construction Project FreeLance\ConstructionAPIs\Infrastructure\obj\Release\net6.0\Infrastructure.pdb
 G:\Construction Project FreeLance\ConstructionAPIs\Infrastructure\obj\Release\net6.0\Infrastructure.genruntimeconfig.cache
 G:\Construction Project FreeLance\ConstructionAPIs\Infrastructure\obj\Release\net6.0\ref\Infrastructure.dll
+E:\lastVesionOfConstruction\Infrastructure\bin\Release\net6.0\Infrastructure.deps.json
+E:\lastVesionOfConstruction\Infrastructure\bin\Release\net6.0\Infrastructure.runtimeconfig.json
+E:\lastVesionOfConstruction\Infrastructure\bin\Release\net6.0\Infrastructure.dll
+E:\lastVesionOfConstruction\Infrastructure\bin\Release\net6.0\Infrastructure.pdb
+E:\lastVesionOfConstruction\Infrastructure\bin\Release\net6.0\Data.dll
+E:\lastVesionOfConstruction\Infrastructure\bin\Release\net6.0\Data.pdb
+E:\lastVesionOfConstruction\Infrastructure\obj\Release\net6.0\Infrastructure.csproj.AssemblyReference.cache
+E:\lastVesionOfConstruction\Infrastructure\obj\Release\net6.0\Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+E:\lastVesionOfConstruction\Infrastructure\obj\Release\net6.0\Infrastructure.AssemblyInfoInputs.cache
+E:\lastVesionOfConstruction\Infrastructure\obj\Release\net6.0\Infrastructure.AssemblyInfo.cs
+E:\lastVesionOfConstruction\Infrastructure\obj\Release\net6.0\Infrastructure.csproj.CoreCompileInputs.cache
+E:\lastVesionOfConstruction\Infrastructure\obj\Release\net6.0\Infrastructure.csproj.CopyComplete
+E:\lastVesionOfConstruction\Infrastructure\obj\Release\net6.0\Infrastructure.dll
+E:\lastVesionOfConstruction\Infrastructure\obj\Release\net6.0\refint\Infrastructure.dll
+E:\lastVesionOfConstruction\Infrastructure\obj\Release\net6.0\Infrastructure.pdb
+E:\lastVesionOfConstruction\Infrastructure\obj\Release\net6.0\Infrastructure.genruntimeconfig.cache
+E:\lastVesionOfConstruction\Infrastructure\obj\Release\net6.0\ref\Infrastructure.dll

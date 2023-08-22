@@ -27,10 +27,10 @@ namespace Infrastructure.Repositories
                 var result = await constructionContext.ContentPage
                     .Include(i => i.Content)
                     .ThenInclude(t => t.ContentItem)
-                     .OrderByDescending(s => s.Id)
+                    //.OrderByDescending(s => s.Id)
                     .Select(s => new
                     {
-                         Id = s.Id ,
+                        Id = s.Id,
                         header = s.headerAR,
                         bg = s.bg,
                         title = s.Content.TitleAR,
@@ -42,8 +42,8 @@ namespace Infrastructure.Repositories
                             image = r.image
                         })
                     })
-                   
-                    .FirstOrDefaultAsync();
+
+                    .ToListAsync();//FirstOrDefaultAsync();
                 return result; 
             }
             else
@@ -51,20 +51,20 @@ namespace Infrastructure.Repositories
                 var result = await constructionContext.ContentPage
                .Include(i => i.Content)
                .ThenInclude(i => i.ContentItem)
-               .OrderByDescending(i => i.Id)
-               .Select(s => new 
-               {    
+               //.OrderByDescending(i => i.Id)
+               .Select(s => new
+               {
                    header = s.header,
                    bg = s.bg,
                    title = s.Content.Title,
-                   Contents= s.Content.ContentItem.Select(r => new 
+                   Contents = s.Content.ContentItem.Select(r => new
                    {
                        Id = r.Id,
                        title = r.title,
                        desc = r.desc,
                        image = r.image
                    })
-               }).FirstOrDefaultAsync();
+               }).ToListAsync();//.FirstOrDefaultAsync();
 
                 return result;
             }
